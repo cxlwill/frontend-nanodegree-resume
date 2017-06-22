@@ -25,10 +25,10 @@ var bio = {
 var work = {
     "jobs" :[
         {
-            "emloyer": "Beijing Yingke Lawfirm",
+            "employer": "Beijing Yingke Lawfirm",
             "title": "Legal Assistant",
             "location": "Xiamen",
-            "dates": "2016.6-2616.12",
+            "dates": "June, 2016 - December, 2016",
             "description": "Assisted Senior Lawyers in legal research, information disclosure and contracts drafting, involving areas of Capital Market, Real Estate and Construction."
 
         },
@@ -36,7 +36,7 @@ var work = {
             "employer": "Guotai Junan Securities Co. Ltd.",
             "title": "Intern",
             "location": "Shanghai",
-            "dates": "2014.3-2014.5",
+            "dates": "March, 2014.3 - May, 2014",
             "description": "Assisted in bidding and distribution of government bonds and financial bonds, including drafting distribution agreements and collect published information."
         }
     ]
@@ -86,7 +86,87 @@ var education = {
             "url" : ""
         }
     ]
+};
+//技能展示
+if (bio.skills.length > 0) {
+    $("#header").append(HTMLskillsStart);
+
+    var formattedSkill = HTMLskills.replace("%data%", bio.skills[0]);
+    $("#skills").append(formattedSkill);
+    var formattedSkill = HTMLskills.replace("%data%", bio.skills[1]);
+    $("#skills").append(formattedSkill);
+    var formattedSkill = HTMLskills.replace("%data%", bio.skills[2]);
+    $("#skills").append(formattedSkill);
+}
+
+var formattedName = HTMLheaderName.replace("%data%", bio.name);
+$("#header").prepend(formattedName);
+
+
+//工作展示
+work.jobs.forEach(function (job) {
+        $("#workExperience").append(HTMLworkStart);
+        //格式化所有属性
+        var formattedEmployer = HTMLworkEmployer.replace("%data%", job.employer);
+        var formattedTitle = HTMLworkTitle.replace("%data%", job.title);
+        var formatteddates = HTMLworkDates.replace("%data%", job.dates);
+        var formattedLocation = HTMLworkLocation.replace("%data%", job.location);
+        var formattedDescription = HTMLworkDescription.replace("%data%", job.description);
+        var formattedEmployerTitle = formattedEmployer + formattedTitle;
+        //调用显示
+        $(".work-entry:last").append(formattedEmployerTitle);
+        $(".work-entry:last").append(formatteddates);
+        $(".work-entry:last").append(formattedLocation);
+        $(".work-entry:last").append(formattedDescription);
+    }
+)
+//项目展示
+projects.display = function() {
+    projects.projects.forEach(function (project) {
+    $("#projects").append(HTMLprojectStart);
+    var formattedTitle = HTMLprojectTitle.replace("%data%", project.title);
+    var formattedDates = HTMLprojectDates.replace("%data%", project.dates);
+    var formattedDescription = HTMLprojectDescription.replace("%data%", project.description);
+
+    $(".project-entry:last").append(formattedTitle);
+    $(".project-entry:last").append(formattedDates);
+    $(".project-entry:last").append(formattedDescription);
+
+    if (project.images.length > 0) {
+        project.images.forEach(function (image) {
+            var formattedImage = HTMLprojectImage.replace("%data%", image);
+            $(".project-entry:last").append(formattedImage);
+                    }
+                )
+            }
+        }
+    )
+}
+
+projects.display();
+
+//练习
+function locationizer(work_obj) {
+    var locationArray = [];
+    work_obj.jobs.forEach(function (job) {
+        locationArray.push(job.location);
+    }
+    );
+    return locationArray;
+}
+
+console.log(locationizer(work));
+
+//练习-改名
+
+function inName() {
+    var name = bio.name.trim().split(" ");
+    name[1] = name[1].toUpperCase();
+    name[0] = name[0].slice(0,1).toUpperCase() + name[0].slice(1).toLowerCase();
+    name = name[0] + " " + name[1];
+    console.log(name);
 }
 
 
-
+$("#main").append(internationalizeButton);
+$("#mapDiv").append(googleMap);
