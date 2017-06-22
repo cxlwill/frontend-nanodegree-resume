@@ -14,13 +14,16 @@ var bio = {
         "mobile": "18750281283",
         "email": "cxlwill@outlook.com",
         "github": "cxlwill",
-        "Wechat": "cxlwill",
+        "wechat": "cxlwill",
+        "blog": "cxlwill.com",
         "location": "Xiamen"
     },
-    "pictureURL" : "",
+    "welcomeMessage": "A lawyer who loves coding.",
+    "biopic" : "images/fry.jpg",
     "welcomeMessage" : "Hello, World!",
     "skills" : ["cube", "programming", "front-end"]
 };
+
 //工作情况
 var work = {
     "jobs" :[
@@ -60,10 +63,10 @@ var projects = {
 };
 //教育背景
 var education = {
-    "school": [
+    "schools": [
         {
             "name": "Fudan University",
-            "city": "Shanghai, CN",
+            "location": "Shanghai, CN",
             "degree": "BA",
             "majors": ["Law"],
             "minor": "Account",
@@ -71,7 +74,7 @@ var education = {
         },
         {
             "name": "Queen Mary University of London",
-            "city": "London, GB",
+            "location": "London, GB",
             "degree": "Masters",
             "majors": ["International Business Law"],
             "minor": "Finance",
@@ -87,22 +90,47 @@ var education = {
         }
     ]
 };
-//技能展示
-if (bio.skills.length > 0) {
-    $("#header").append(HTMLskillsStart);
 
-    var formattedSkill = HTMLskills.replace("%data%", bio.skills[0]);
-    $("#skills").append(formattedSkill);
-    var formattedSkill = HTMLskills.replace("%data%", bio.skills[1]);
-    $("#skills").append(formattedSkill);
-    var formattedSkill = HTMLskills.replace("%data%", bio.skills[2]);
-    $("#skills").append(formattedSkill);
+//信息展示
+bio.display = function dislayBio() {
+    //头部信息
+    var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
+    $("#header").prepend(formattedRole);
+    var formattedName = HTMLheaderName.replace("%data%", bio.name);
+    $("#header").prepend(formattedName);
+    //联系方式
+    var formattedContacts = function () {
+        HTMLcontactGeneric.replace("%contact%", "Contacts");
+        HTMLcontactGeneric.replace("data", "");
+    };
+    $("#topContacts").append(formattedContacts());
+    //具体联系方式
+    //var contactsLength = Object.keys(bio.contacts).length;
+    var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
+    $("#topContacts").append(formattedMobile);
+    var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
+    $("#topContacts").append(formattedEmail);
+    var formattedWechat = HTMLwechat.replace("%data%", bio.contacts.wechat);
+    $("#topContacts").append(formattedWechat);
+    var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
+    $("#topContacts").append(formattedGithub);
+    var formattedBlog = HTMLblog.replace("%data%", bio.contacts.blog);
+    $("#topContacts").append(formattedBlog);
+    var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
+    $("#topContacts").append(formattedLocation);
+    //头像及问候语
+    var formattedPic = HTMLbioPic.replace("%data%", bio.biopic);
+    $("#header").append(formattedPic);
+    //技能展示
+    if (bio.skills.length > 0) {
+        $("#header").append(HTMLskillsStart);
+        bio.skills.forEach(function(skill) {
+            var formattedSkill = HTMLskills.replace("%data%", skill);
+            $("#skills").append(formattedSkill);
+        })
+    }
 }
-
-var formattedName = HTMLheaderName.replace("%data%", bio.name);
-$("#header").prepend(formattedName);
-
-
+bio.display();
 //工作展示
 work.jobs.forEach(function (job) {
         $("#workExperience").append(HTMLworkStart);
