@@ -1,11 +1,3 @@
-/*
-var formattedSkills = HTMLskills.replace("%data%", skills);
-var name = "Jocleyn Chen";
-var formattedName = HTMLheaderName.replace("%data%", name);
-var role = "Web Designer";
-var formattedRole = HTMLheaderRole.replace("%data%", role);
-*/
-
 //个人信息
 var bio = {
     "name" : "Jocleyn Chen",
@@ -19,17 +11,16 @@ var bio = {
         "location": "Xiamen"
     },
     "welcomeMessage": "A lawyer who loves coding.",
-    "biopic" : "images/fry.jpg",
+    "biopic" : "images/avatar.jpg",
     "skills" : ["programming", "cube", "front-end"]
 };
-
 //工作情况
 var work = {
     "jobs" :[
         {
             "employer": "Beijing Yingke Lawfirm",
             "title": "Legal Assistant",
-            "location": "Xiamen",
+            "location": "Xiamen, CN",
             "dates": "June, 2016 - December, 2016",
             "description": "Assisted Senior Lawyers in legal research, information disclosure and contracts drafting, involving areas of Capital Market, Real Estate and Construction."
 
@@ -37,7 +28,7 @@ var work = {
         {
             "employer": "Guotai Junan Securities Co. Ltd.",
             "title": "Intern",
-            "location": "Shanghai",
+            "location": "Shanghai, CN",
             "dates": "March, 2014 - May, 2014",
             "description": "Assisted in bidding and distribution of government bonds and financial bonds, including drafting distribution agreements and collect published information."
         }
@@ -83,11 +74,10 @@ var education = {
             "title": "Front-end Nanodgree",
             "school": "Udacity",
             "dates": "Summer, 2017",
-            "url" : ""
+            "url" : "https://cn.udacity.com/course/front-end-web-developer-nanodegree--nd001-cn-basic"
         }
     ]
 };
-
 //教育信息展示
 education.display = function() {
     //全日制教育
@@ -138,17 +128,16 @@ bio.display = function () {
     //具体联系方式
     //var contactsLength = Object.keys(bio.contacts).length;
     var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
-    $("#topContacts").append(formattedMobile);
     var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
-    $("#topContacts").append(formattedEmail);
     var formattedWechat = HTMLwechat.replace("%data%", bio.contacts.wechat);
-    $("#topContacts").append(formattedWechat);
     var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
-    $("#topContacts").append(formattedGithub);
     var formattedBlog = HTMLblog.replace("%data%", bio.contacts.blog);
-    $("#topContacts").append(formattedBlog);
     var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
-    $("#topContacts").append(formattedLocation);
+    var formattedContacts = formattedMobile + formattedEmail + formattedWechat + formattedGithub +formattedBlog +formattedLocation;
+    $("#topContacts").append(formattedContacts);
+    if (Object.keys(bio.contacts).length > 0) {
+        $("#footerContacts").append(formattedContacts);
+    }
     //头像及问候语
     var formattedWelcomeMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
     $("#header").append(formattedWelcomeMsg);
@@ -206,8 +195,8 @@ projects.display = function() {
         }
     )
 }
-
 projects.display();
+//地图展示
 $("#mapDiv").append(googleMap);
 
 
