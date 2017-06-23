@@ -12,7 +12,7 @@ var bio = {
     },
     "welcomeMessage": "A lawyer who loves coding.",
     "biopic" : "images/avatar.jpg",
-    "skills" : ["HTML/CSS", "JavaScript","Python","R","Cube", "Soduku", "Legal skills"]
+    "skills" : ["HTML/CSS", "JavaScript","Python","R","Cube", "Sudoku", "Legal skills"]
 };
 //工作情况
 var work = {
