@@ -20,8 +20,7 @@ var bio = {
     },
     "welcomeMessage": "A lawyer who loves coding.",
     "biopic" : "images/fry.jpg",
-    "welcomeMessage" : "Hello, World!",
-    "skills" : ["cube", "programming", "front-end"]
+    "skills" : ["programming", "cube", "front-end"]
 };
 
 //工作情况
@@ -39,7 +38,7 @@ var work = {
             "employer": "Guotai Junan Securities Co. Ltd.",
             "title": "Intern",
             "location": "Shanghai",
-            "dates": "March, 2014.3 - May, 2014",
+            "dates": "March, 2014 - May, 2014",
             "description": "Assisted in bidding and distribution of government bonds and financial bonds, including drafting distribution agreements and collect published information."
         }
     ]
@@ -49,13 +48,13 @@ var projects = {
     "projects" :[
         {
             "title": "Animal Card",
-            "dates": 2017,
+            "dates": "June, 2017",
             "description": "A page shows Black Face Sheep's information.",
             "images": ""
         },
         {
             "title": "Project Showpage",
-            "dates": 2017,
+            "dates": "June, 2017",
             "description": "A page shows all projected finished in Udacity Front-end nanodegree.",
             "images":""
         }
@@ -69,30 +68,62 @@ var education = {
             "location": "Shanghai, CN",
             "degree": "BA",
             "majors": ["Law"],
-            "minor": "Account",
-            "Graduation": 2014
+            "dates": "September, 2010 - June, 2014"
         },
         {
             "name": "Queen Mary University of London",
             "location": "London, GB",
             "degree": "Masters",
             "majors": ["International Business Law"],
-            "minor": "Finance",
-            "Graduation": 2015
+            "dates": "September, 2014 - November, 2015"
         }
     ],
     "onlineCourses": [
         {
             "title": "Front-end Nanodgree",
             "school": "Udacity",
-            "dates": 2017,
+            "dates": "Summer, 2017",
             "url" : ""
         }
     ]
 };
 
+//教育信息展示
+education.display = function() {
+    //全日制教育
+    education.schools.forEach(function(school) {
+        $("#education").append(HTMLschoolStart);
+        var formattedSchoolName = HTMLschoolName.replace("%data%", school.name);
+        var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", school.degree);
+        var formattedSchoolTitle =  formattedSchoolName + formattedSchoolDegree;
+        $(".education-entry:last").append(formattedSchoolTitle);
+        var formattedSchoolDates = HTMLschoolDates.replace("%data%", school.dates);
+        $(".education-entry:last").append(formattedSchoolDates);
+        var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", school.location);
+        $(".education-entry:last").append(formattedSchoolLocation);
+        var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", school.majors);
+        $(".education-entry:last").append(formattedSchoolMajor);
+            }
+        )
+    //在线教育
+    if (education.onlineCourses.length > 0) {
+        $(".education-entry:last").append(HTMLonlineClasses);
+        education.onlineCourses.forEach(function(course) {
+            var formattedCourseTitle = HTMLonlineTitle.replace("%data%", course.title);
+            var formattedCourseSchool = HTMLonlineSchool.replace("%data%", course.school);
+            var formattedCourseHeader = formattedCourseTitle + formattedCourseSchool;
+            $(".education-entry:last").append(formattedCourseHeader);
+            var formattedCourseDates = HTMLonlineDates.replace("%data%", course.dates);
+            $(".education-entry:last").append(formattedCourseDates);
+            var formattedCourseURL = HTMLonlineURL.replace("%data%", course.url);
+            $(".education-entry:last").append(formattedCourseURL);
+            }
+            )
+        }
+    }
+education.display();
 //信息展示
-bio.display = function dislayBio() {
+bio.display = function () {
     //头部信息
     var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
     $("#header").prepend(formattedRole);
@@ -119,6 +150,8 @@ bio.display = function dislayBio() {
     var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
     $("#topContacts").append(formattedLocation);
     //头像及问候语
+    var formattedWelcomeMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
+    $("#header").append(formattedWelcomeMsg);
     var formattedPic = HTMLbioPic.replace("%data%", bio.biopic);
     $("#header").append(formattedPic);
     //技能展示
@@ -132,38 +165,41 @@ bio.display = function dislayBio() {
 }
 bio.display();
 //工作展示
-work.jobs.forEach(function (job) {
+work.display = function () {
+    work.jobs.forEach(function (job) {
         $("#workExperience").append(HTMLworkStart);
-        //格式化所有属性
+            //格式化所有属性
         var formattedEmployer = HTMLworkEmployer.replace("%data%", job.employer);
         var formattedTitle = HTMLworkTitle.replace("%data%", job.title);
         var formatteddates = HTMLworkDates.replace("%data%", job.dates);
         var formattedLocation = HTMLworkLocation.replace("%data%", job.location);
         var formattedDescription = HTMLworkDescription.replace("%data%", job.description);
         var formattedEmployerTitle = formattedEmployer + formattedTitle;
-        //调用显示
+            //调用显示
         $(".work-entry:last").append(formattedEmployerTitle);
         $(".work-entry:last").append(formatteddates);
         $(".work-entry:last").append(formattedLocation);
         $(".work-entry:last").append(formattedDescription);
-    }
-)
+        }
+    )
+}
+work.display();
 //项目展示
 projects.display = function() {
     projects.projects.forEach(function (project) {
-    $("#projects").append(HTMLprojectStart);
-    var formattedTitle = HTMLprojectTitle.replace("%data%", project.title);
-    var formattedDates = HTMLprojectDates.replace("%data%", project.dates);
-    var formattedDescription = HTMLprojectDescription.replace("%data%", project.description);
+        $("#projects").append(HTMLprojectStart);
+        var formattedTitle = HTMLprojectTitle.replace("%data%", project.title);
+        var formattedDates = HTMLprojectDates.replace("%data%", project.dates);
+        var formattedDescription = HTMLprojectDescription.replace("%data%", project.description);
 
-    $(".project-entry:last").append(formattedTitle);
-    $(".project-entry:last").append(formattedDates);
-    $(".project-entry:last").append(formattedDescription);
+        $(".project-entry:last").append(formattedTitle);
+        $(".project-entry:last").append(formattedDates);
+        $(".project-entry:last").append(formattedDescription);
 
-    if (project.images.length > 0) {
-        project.images.forEach(function (image) {
-            var formattedImage = HTMLprojectImage.replace("%data%", image);
-            $(".project-entry:last").append(formattedImage);
+        if (project.images.length > 0) {
+            project.images.forEach(function (image) {
+                var formattedImage = HTMLprojectImage.replace("%data%", image);
+                $(".project-entry:last").append(formattedImage);
                     }
                 )
             }
@@ -172,29 +208,35 @@ projects.display = function() {
 }
 
 projects.display();
+$("#mapDiv").append(googleMap);
 
-//练习
-function locationizer(work_obj) {
-    var locationArray = [];
-    work_obj.jobs.forEach(function (job) {
-        locationArray.push(job.location);
-    }
-    );
-    return locationArray;
-}
 
-console.log(locationizer(work));
+
+
+//练习-定位
+/*
+*function locationizer(work_obj) {
+*    var locationArray = [];
+*    work_obj.jobs.forEach(function (job) {
+*        locationArray.push(job.location);
+*    }
+*    );
+*    return locationArray;
+*}
+*console.log(locationizer(work));
+*/
 
 //练习-改名
+/*function inName() {
+*    var name = bio.name.trim().split(" ");
+*    name[1] = name[1].toUpperCase();
+*    name[0] = name[0].slice(0,1).toUpperCase() + name[0].slice(1).toLowerCase();
+*    name = name[0] + " " + name[1];
+*    console.log(name);
+*}
+*$("#main").append(internationalizeButton);
+*/
 
-function inName() {
-    var name = bio.name.trim().split(" ");
-    name[1] = name[1].toUpperCase();
-    name[0] = name[0].slice(0,1).toUpperCase() + name[0].slice(1).toLowerCase();
-    name = name[0] + " " + name[1];
-    console.log(name);
-}
 
 
-$("#main").append(internationalizeButton);
-$("#mapDiv").append(googleMap);
+
