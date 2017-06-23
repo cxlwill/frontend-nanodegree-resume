@@ -41,21 +41,21 @@ var projects = {
             "title": "MagicMirror",
             "dates": "Summer, 2017",
             "description": "A homemade MagicMirror driven by Raspberry Pi, including Chatbot(Chinese and English supported), home assistant system, built-in homebridge(Apple Homekit Support) and Showpage.",
-            "images": "images/MagicMirror.jpg",
+            "images": ["images/MagicMirror.jpg"],
             "url": "https://github.com/cxlwill/MagicMirror"
         },
         {
             "title": "MM-Chatbot",
             "dates": "Summer, 2017",
             "description": "A Chinese Chatbot written in Python, using Baidu ASR&TTS and Tuling Robot.",
-            "images": "images/Chatbot.jpg",
+            "images": ["images/Chatbot.jpg"],
             "url": "https://github.com/cxlwill/MagicMirrorChatbot"
         },
         {
             "title": "Project Showpage",
             "dates": "June, 2017",
             "description": "A page shows all projected finished in Udacity Front-end nanodegree.",
-            "images":"images/website.jpg",
+            "images": ["images/website.jpg"],
             "url": "https://github.com/cxlwill/Udacity_FEND_P3"
         }
     ]
@@ -68,14 +68,16 @@ var education = {
             "location": "Shanghai, CN",
             "degree": "BA",
             "majors": ["Law"],
-            "dates": "September, 2010 - June, 2014"
+            "dates": "September, 2010 - June, 2014",
+            "url": "http://www.fudan.edu.cn"
         },
         {
             "name": "Queen Mary University of London",
             "location": "London, GB",
             "degree": "Masters",
             "majors": ["International Business Law"],
-            "dates": "September, 2014 - November, 2015"
+            "dates": "September, 2014 - November, 2015",
+            "url": "http://www.qmul.ac.uk/"
         }
     ],
     "onlineCourses": [
@@ -92,9 +94,8 @@ var education = {
 bio.display = function () {
     //头部信息
     var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
-    $("#header").prepend(formattedRole);
     var formattedName = HTMLheaderName.replace("%data%", bio.name);
-    $("#header").prepend(formattedName);
+    $("#header").prepend(formattedName, formattedRole);
     //联系方式
     var formattedContacts = function () {
         HTMLcontactGeneric.replace("%contact%", "Contacts");
@@ -116,9 +117,8 @@ bio.display = function () {
     }
     //头像及问候语
     var formattedWelcomeMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
-    $("#header").append(formattedWelcomeMsg);
     var formattedPic = HTMLbioPic.replace("%data%", bio.biopic);
-    $("#header").append(formattedPic);
+    $("#header").append(formattedWelcomeMsg, formattedPic);
     //技能展示
     if (bio.skills.length > 0) {
         $("#header").append(HTMLskillsStart);
@@ -141,10 +141,7 @@ work.display = function () {
         var formattedDescription = HTMLworkDescription.replace("%data%", job.description);
         var formattedEmployerTitle = formattedEmployer + formattedTitle;
             //调用显示
-        $(".work-entry:last").append(formattedEmployerTitle);
-        $(".work-entry:last").append(formatteddates);
-        $(".work-entry:last").append(formattedLocation);
-        $(".work-entry:last").append(formattedDescription);
+        $(".work-entry:last").append(formattedEmployerTitle, formatteddates, formattedLocation, formattedDescription);
         }
     )
 }
@@ -158,13 +155,13 @@ projects.display = function() {
         var formattedDates = HTMLprojectDates.replace("%data%", project.dates);
         var formattedDescription = HTMLprojectDescription.replace("%data%", project.description);
 
-        $(".project-entry:last").append(formattedTitle);
-        $(".project-entry:last").append(formattedDates);
-        $(".project-entry:last").append(formattedDescription);
+        $(".project-entry:last").append(formattedTitle, formattedDates, formattedDescription);
 
         if (project.images.length > 0) {
-            var formattedImage = HTMLprojectImage.replace("%data%", project.images);
-            $(".project-entry:last").append(formattedImage);
+            project.images.forEach (function (image) {
+                var formattedImage = HTMLprojectImage.replace("%data%", image);
+                $(".project-entry:last").append(formattedImage);
+                })
             }
         }
     )
@@ -178,13 +175,10 @@ education.display = function() {
         var formattedSchoolName = HTMLschoolName.replace("%data%", school.name);
         var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", school.degree);
         var formattedSchoolTitle =  formattedSchoolName + formattedSchoolDegree;
-        $(".education-entry:last").append(formattedSchoolTitle);
         var formattedSchoolDates = HTMLschoolDates.replace("%data%", school.dates);
-        $(".education-entry:last").append(formattedSchoolDates);
         var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", school.location);
-        $(".education-entry:last").append(formattedSchoolLocation);
         var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", school.majors);
-        $(".education-entry:last").append(formattedSchoolMajor);
+        $(".education-entry:last").append(formattedSchoolTitle, formattedSchoolDates, formattedSchoolLocation, formattedSchoolMajor);
             }
         )
     //在线教育
@@ -194,11 +188,10 @@ education.display = function() {
             var formattedCourseTitle = HTMLonlineTitle.replace("%data%", course.title);
             var formattedCourseSchool = HTMLonlineSchool.replace("%data%", course.school);
             var formattedCourseHeader = formattedCourseTitle + formattedCourseSchool;
-            $(".education-entry:last").append(formattedCourseHeader);
             var formattedCourseDates = HTMLonlineDates.replace("%data%", course.dates);
-            $(".education-entry:last").append(formattedCourseDates);
-            var formattedCourseURL = HTMLonlineURL.replace("%data%", course.url);
-            $(".education-entry:last").append(formattedCourseURL);
+            var formattedURL = HTMLonlineURL.replace("%data%", course.url);
+            var formattedCourseURL = formattedURL.replace("#", course.url);
+            $(".education-entry:last").append(formattedCourseHeader, formattedCourseDates, formattedCourseURL);
             }
             )
         }
