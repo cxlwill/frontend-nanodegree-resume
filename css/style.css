@@ -66,6 +66,31 @@ h5 {
 
 }
 
+p {
+  font-size: 14px;
+  color: #333;
+  line-height: 21px;
+}
+
+a {
+  color: #336699;
+  text-decoration: none;
+  margin-top: 10px;
+  display: block;
+}
+
+img {
+  padding: 10px;
+}
+
+span {
+  padding: 15px;
+  color: #feeeed;
+}
+
+ul {
+  list-style-type: none;
+}
 
 .date-text {
   font-style: italic;
@@ -84,19 +109,6 @@ h5 {
 
 }
 
-p {
-  font-size: 14px;
-  color: #333;
-  line-height: 21px;
-}
-
-a {
-  color: #336699;
-  text-decoration: none;
-  margin-top: 10px;
-  display: block;
-}
-
 .welcome-message {
   font-style: italic;
   font-size: 18px;
@@ -104,37 +116,21 @@ a {
   line-height: 28px;
 }
 
-#skills-h3 {
-  color: #3399CC;
-  display: none;
-}
-
 .blue {
   background-color: #336699;
 }
-/*#f5ae23*/
-.orange-text {
-  color: #3399CC;
+
+.blue-text {
+  color: #3399cc;
 }
 
 .white-text {
   font-weight: bold;
   color: #fff;
 }
-/*#f3f3f3*/
-.gray {
-  background-color: #f3f3f3;
-  padding-bottom: 10px;
-  clear: both;
-}
 
 .dark-gray {
   background-color: #4a4a4a;
-}
-
-/* TODO: Replace with image later */
-#header {
-  background-color: #336699;
 }
 
 .flex-box {
@@ -157,10 +153,6 @@ a {
   padding: 2.5% 5%;
 }
 
-ul {
-  list-style-type: none;
-}
-
 .biopic {
   float: left;
   padding: 10px;
@@ -168,19 +160,42 @@ ul {
   display: none;
 }
 
-img {
-  padding: 10px;
+.big-h2 {
+  padding: 10px 5% 0px;
 }
 
-span {
-  padding: 15px;
-  color: #feeeed;
+.hr-section {
+  margin: 5px 4%;
+}
+
+#header {
+  background-color: #336699;
 }
 
 #lets-connect {
   text-align: center;
 }
 
+#skills-h3 {
+  color: #3399cc;
+  display: none;
+}
+
+#onlineClass-h3 {
+  padding: 10px 5px 0px 0px;
+}
+
+#work-h2 {
+  padding-top: 20px;
+}
+
+#skill-item {
+  padding-bottom: 10px;
+}
+
+#education {
+  padding-bottom: 5px;
+}
 /* Media queries to handle various device widths */
 
 @media only screen and (max-width: 1024px) {
@@ -206,7 +221,7 @@ span {
     display: none;
   }
 }
-
+/*地图*/
 #map {
   display: block;
   height: 100%;
@@ -225,14 +240,23 @@ span {
     display: block;
   }
 }
-.big-h2 {
-  padding: 10px 5% 0px;
+
+/*d3.js尝试*/
+.chart rect {
+  fill: white;
 }
 
-#onlineClass-h3 {
-  padding: 10px 5px 0px 0px;
+.chart text {
+  fill: #336699;
+  font: 10px sans-serif;
+  text-anchor: end;
 }
 
-#work-h2 {
-  padding-top: 20px
+.skill-container {
+  display: inline-block;
+  vertical-align: top；
+}
+
+#skills {
+  float: left;
 }

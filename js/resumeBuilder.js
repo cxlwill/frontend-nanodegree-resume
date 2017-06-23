@@ -12,7 +12,7 @@ var bio = {
     },
     "welcomeMessage": "A lawyer who loves coding.",
     "biopic" : "images/avatar.jpg",
-    "skills" : ["programming", "cube", "front-end"]
+    "skills" : ["HTML/CSS", "JavaScript","Python","R","Cube", "Soduku", "Legal skills"]
 };
 //工作情况
 var work = {
@@ -38,16 +38,25 @@ var work = {
 var projects = {
     "projects" :[
         {
-            "title": "Animal Card",
-            "dates": "June, 2017",
-            "description": "A page shows Black Face Sheep's information.",
-            "images": ""
+            "title": "MagicMirror",
+            "dates": "Summer, 2017",
+            "description": "A homemade MagicMirror driven by Raspberry Pi, including Chatbot(Chinese and English supported), home assistant system, built-in homebridge(Apple Homekit Support) and Showpage.",
+            "images": "images/MagicMirror.jpg",
+            "url": "https://github.com/cxlwill/MagicMirror"
+        },
+        {
+            "title": "MM-Chatbot",
+            "dates": "Summer, 2017",
+            "description": "A Chinese Chatbot written in Python, using Baidu ASR&TTS and Tuling Robot.",
+            "images": "images/Chatbot.jpg",
+            "url": "https://github.com/cxlwill/MagicMirrorChatbot"
         },
         {
             "title": "Project Showpage",
             "dates": "June, 2017",
             "description": "A page shows all projected finished in Udacity Front-end nanodegree.",
-            "images":""
+            "images":"images/website.jpg",
+            "url": "https://github.com/cxlwill/Udacity_FEND_P3"
         }
     ]
 };
@@ -78,40 +87,7 @@ var education = {
         }
     ]
 };
-//教育信息展示
-education.display = function() {
-    //全日制教育
-    education.schools.forEach(function(school) {
-        $("#education").append(HTMLschoolStart);
-        var formattedSchoolName = HTMLschoolName.replace("%data%", school.name);
-        var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", school.degree);
-        var formattedSchoolTitle =  formattedSchoolName + formattedSchoolDegree;
-        $(".education-entry:last").append(formattedSchoolTitle);
-        var formattedSchoolDates = HTMLschoolDates.replace("%data%", school.dates);
-        $(".education-entry:last").append(formattedSchoolDates);
-        var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", school.location);
-        $(".education-entry:last").append(formattedSchoolLocation);
-        var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", school.majors);
-        $(".education-entry:last").append(formattedSchoolMajor);
-            }
-        )
-    //在线教育
-    if (education.onlineCourses.length > 0) {
-        $(".education-entry:last").append(HTMLonlineClasses);
-        education.onlineCourses.forEach(function(course) {
-            var formattedCourseTitle = HTMLonlineTitle.replace("%data%", course.title);
-            var formattedCourseSchool = HTMLonlineSchool.replace("%data%", course.school);
-            var formattedCourseHeader = formattedCourseTitle + formattedCourseSchool;
-            $(".education-entry:last").append(formattedCourseHeader);
-            var formattedCourseDates = HTMLonlineDates.replace("%data%", course.dates);
-            $(".education-entry:last").append(formattedCourseDates);
-            var formattedCourseURL = HTMLonlineURL.replace("%data%", course.url);
-            $(".education-entry:last").append(formattedCourseURL);
-            }
-            )
-        }
-    }
-education.display();
+
 //信息展示
 bio.display = function () {
     //头部信息
@@ -177,7 +153,8 @@ work.display();
 projects.display = function() {
     projects.projects.forEach(function (project) {
         $("#projects").append(HTMLprojectStart);
-        var formattedTitle = HTMLprojectTitle.replace("%data%", project.title);
+        var Title = HTMLprojectTitle.replace("%data%", project.title);
+        var formattedTitle = Title.replace("#", project.url);
         var formattedDates = HTMLprojectDates.replace("%data%", project.dates);
         var formattedDescription = HTMLprojectDescription.replace("%data%", project.description);
 
@@ -186,21 +163,71 @@ projects.display = function() {
         $(".project-entry:last").append(formattedDescription);
 
         if (project.images.length > 0) {
-            project.images.forEach(function (image) {
-                var formattedImage = HTMLprojectImage.replace("%data%", image);
-                $(".project-entry:last").append(formattedImage);
-                    }
-                )
+            var formattedImage = HTMLprojectImage.replace("%data%", project.images);
+            $(".project-entry:last").append(formattedImage);
             }
         }
     )
 }
 projects.display();
+//教育信息展示
+education.display = function() {
+    //全日制教育
+    education.schools.forEach(function(school) {
+        $("#education").append(HTMLschoolStart);
+        var formattedSchoolName = HTMLschoolName.replace("%data%", school.name);
+        var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", school.degree);
+        var formattedSchoolTitle =  formattedSchoolName + formattedSchoolDegree;
+        $(".education-entry:last").append(formattedSchoolTitle);
+        var formattedSchoolDates = HTMLschoolDates.replace("%data%", school.dates);
+        $(".education-entry:last").append(formattedSchoolDates);
+        var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", school.location);
+        $(".education-entry:last").append(formattedSchoolLocation);
+        var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", school.majors);
+        $(".education-entry:last").append(formattedSchoolMajor);
+            }
+        )
+    //在线教育
+    if (education.onlineCourses.length > 0) {
+        $(".education-entry:last").append(HTMLonlineClasses);
+        education.onlineCourses.forEach(function(course) {
+            var formattedCourseTitle = HTMLonlineTitle.replace("%data%", course.title);
+            var formattedCourseSchool = HTMLonlineSchool.replace("%data%", course.school);
+            var formattedCourseHeader = formattedCourseTitle + formattedCourseSchool;
+            $(".education-entry:last").append(formattedCourseHeader);
+            var formattedCourseDates = HTMLonlineDates.replace("%data%", course.dates);
+            $(".education-entry:last").append(formattedCourseDates);
+            var formattedCourseURL = HTMLonlineURL.replace("%data%", course.url);
+            $(".education-entry:last").append(formattedCourseURL);
+            }
+            )
+        }
+    }
+education.display();
 //地图展示
 $("#mapDiv").append(googleMap);
+//d3.js尝试
+var data = [6, 5, 7, 5, 8, 9, 8];
 
+var width = 200,
+    barHeight = 29;
 
+var x = d3.scale.linear()
+    .domain([0, d3.max(data)])
+    .range([0, width]);
 
+var chart = d3.select(".chart")
+    .attr("width", width)
+    .attr("height", barHeight * data.length);
+
+var bar = chart.selectAll("g")
+    .data(data)
+  .enter().append("g")
+    .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
+
+bar.append("rect")
+    .attr("width", x)
+    .attr("height", barHeight - 10);
 
 //练习-定位
 /*
@@ -225,7 +252,3 @@ $("#mapDiv").append(googleMap);
 *}
 *$("#main").append(internationalizeButton);
 */
-
-
-
-
